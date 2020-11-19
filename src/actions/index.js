@@ -1,4 +1,4 @@
-import { GET_DIGIT, CLEAN_DIGIT, CLEAN_ALL } from "./../constants";
+import { GET_DIGIT, CLEAN_DIGIT, CLEAN_ALL, UPDATE_SIGN } from "./../constants";
 
 export const getDigit = digit => ({
   type: GET_DIGIT,
@@ -12,5 +12,10 @@ export const cleanDigit = () => ({
 
 export const cleanAll = () => ({
   type: CLEAN_ALL,
+  payload: {}
+})
+
+export const updateSign = () => ({
+  type: UPDATE_SIGN,
   payload: {}
 })

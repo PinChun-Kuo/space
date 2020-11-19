@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 
 import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUAL } from './../constants/operators';
 import { initState, reducer } from './../reducers';
-import { getDigit, cleanDigit, cleanAll } from './../actions';
+import { getDigit, cleanDigit, cleanAll, updateSign } from './../actions';
 
 import Button from './button';
 
@@ -16,6 +16,7 @@ const Computer = () => {
   const handleDigitClick = digit => () => dispatch(getDigit(digit));
   const handleCleanDigit = () => dispatch(cleanDigit());
   const handleCleanAll = () => dispatch(cleanAll());
+  const handleUpdateSign = () => dispatch(updateSign());
 
   return (
     <div className='computer-wrapper'>
@@ -35,6 +36,7 @@ const Computer = () => {
               <Button
                 classes={'computer-button--circle function-button'}
                 content = {OPERATOR_UPDATE_SIGN}
+                handleClick = {handleUpdateSign}
               />
               <Button
                 classes={'computer-button--circle function-button'}

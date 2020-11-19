@@ -1,4 +1,4 @@
-import { GET_DIGIT, CLEAN_DIGIT, CLEAN_ALL } from './../constants'
+import { GET_DIGIT, CLEAN_DIGIT, CLEAN_ALL, UPDATE_SIGN } from './../constants'
 
 export const initState = {
   digits: {
@@ -28,6 +28,18 @@ export const reducer = (state, action) => {
       } else {
         num = String(BigInt(current + digit))
       }
+
+      return {
+        ...state,
+        digits: {
+          ...digits,
+          current: num,
+          screen: num
+        }
+      }
+    }
+    case UPDATE_SIGN: {
+      const num = String(BigInt(current) * BigInt(-1));
 
       return {
         ...state,
