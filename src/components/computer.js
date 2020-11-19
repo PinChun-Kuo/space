@@ -1,59 +1,74 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 
-import { OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUAL } from './../constants/operators';
+import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUAL } from './../constants/operators';
+import { initState, reducer } from './../reducers';
+import { getDigit, cleanDigit, cleanAll } from './../actions';
 
 import Button from './button';
 
-const functionArr = [OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE]
 const digitArr = ['0', '.', '1', '2', '3', '4' ,'5' ,'6' , '7', '8', '9'];
 const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUAL];
 
-const Computer = () => (
-  <div className='computer-wrapper'>
-    <div className='computer-background'></div>
-    <div className='computer-content'>
-      <div className='computer-screen'>
-        Screen
-      </div>
-      <div className='computer-buttons'>
-        <div className='computer-buttons__left-side'>
-          <div className='computer-buttons__left-side__function-menu'>
+const Computer = () => {
+  const [state, dispatch] = useReducer(reducer, initState);
+  const { digits: { current, screen } } = state;
+
+  const handleDigitClick = digit => () => dispatch(getDigit(digit));
+  const handleCleanDigit = () => dispatch(cleanDigit());
+  const handleCleanAll = () => dispatch(cleanAll());
+
+  return (
+    <div className='computer-wrapper'>
+      <div className='computer-background'></div>
+      <div className='computer-content'>
+        <div className='computer-screen'>
+          {screen}
+        </div>
+        <div className='computer-buttons'>
+          <div className='computer-buttons__left-side'>
+            <div className='computer-buttons__left-side__function-menu'>
+              <Button
+                classes={'computer-button--circle function-button'}
+                content = {(current === '0') ? OPERATOR_CLEAN_ALL : OPERATOR_CLEAN_DIGIT}
+                handleClick = {(current === '0') ? handleCleanAll : handleCleanDigit}
+              />
+              <Button
+                classes={'computer-button--circle function-button'}
+                content = {OPERATOR_UPDATE_SIGN}
+              />
+              <Button
+                classes={'computer-button--circle function-button'}
+                content = {OPERATOR_PERCENTAGE}
+              />
+            </div>
+            <div className='computer-buttons__left-side__digits'>
             {
-              functionArr.map(func => (
+              digitArr.map(digit => (
                 <Button
-                  key={`function-button-${func}`}
-                  classes={'computer-button--circle function-button'}
-                  content = {func}
+                  key={`digit-button-${digit}`}
+                  classes={`digit-button ${(digit === '0') ? 'computer-button--oval' : 'computer-button--circle'}`}
+                  content = {digit}
+                  handleClick={handleDigitClick(digit)}
+                />
+              ))
+            }
+            </div>
+          </div>
+          <div className='computer-buttons__right-side'>
+            {
+              operatorArr.map(operator => (
+                <Button
+                  key={`operator-button-${operator}`}
+                  classes={'computer-button--circle operator-button'}
+                  content = {operator}
                 />
               ))
             }
           </div>
-          <div className='computer-buttons__left-side__digits'>
-          {
-            digitArr.map(digit => (
-              <Button
-                key={`digit-button-${digit}`}
-                classes={`digit-button ${(digit === '0') ? 'computer-button--oval' : 'computer-button--circle'}`}
-                content = {digit}
-              />
-            ))
-          }
-          </div>
-        </div>
-        <div className='computer-buttons__right-side'>
-          {
-            operatorArr.map(operator => (
-              <Button
-                key={`operator-button-${operator}`}
-                classes={'computer-button--circle operator-button'}
-                content = {operator}
-              />
-            ))
-          }
         </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default Computer;

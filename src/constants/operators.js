@@ -1,4 +1,4 @@
-export const OPERATOR_CLEAN = 'C';
+export const OPERATOR_CLEAN_DIGIT = 'C';
 export const OPERATOR_CLEAN_ALL = 'AC';
 export const OPERATOR_UPDATE_SIGN = '+/-';
 export const OPERATOR_PERCENTAGE = '%';
