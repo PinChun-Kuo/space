@@ -22,6 +22,7 @@
       margin: 20px;
       overflow-x: scroll;
       text-align: right;
+      font-size: 75px;
       color: #ffffff;
     }
 
@@ -60,7 +61,8 @@
       overflow-y: scroll;
 
       .computer-screen {
-        height: 100px;
+        height: calc((100vw - 100px) / 2);
+        font-size: calc((100vw - 100px) / 4);
       }
     }
   }
@@ -73,6 +75,7 @@
 
       .computer-screen {
         height: 120px;
+        font-size: 60px;
       }
     }
   }
