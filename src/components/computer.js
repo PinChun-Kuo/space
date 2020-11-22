@@ -10,7 +10,7 @@ import Button from './button';
 const digitArr = ['0', '.', '1', '2', '3', '4' ,'5' ,'6' , '7', '8', '9'];
 const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUALITY];
 
-const Computer = ({ closeComputer }) => {
+const Computer = ({ handleCloseComputer }) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const { digits: { current, screen } } = state;
 
@@ -23,7 +23,7 @@ const Computer = ({ closeComputer }) => {
 
   return (
     <div className='computer-wrapper'>
-      <div className='computer-background' onClick={closeComputer}></div>
+      <div className='computer-background' onClick={handleCloseComputer}></div>
       <div className='computer-content'>
         <div className='computer-screen'>
           {screen}
@@ -78,7 +78,7 @@ const Computer = ({ closeComputer }) => {
 }
 
 Computer.propTypes = {
-  closeComputer: PropTypes.func.isRequired
+  handleCloseComputer: PropTypes.func.isRequired
 }
 
 export default Computer;

@@ -3,19 +3,16 @@ import Computer from './computer';
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const openComputer = () => setIsOpen(true);
-  const closeComputer = () => setIsOpen(false);
+  const handleOpenComputer = () => setIsOpen(true);
+  const handleCloseComputer = () => setIsOpen(false);
 
   return (
     <div>
-      <button
-        className='btn btn-primary'
-        onClick={openComputer}
-      >
+      <button className='btn btn-primary' onClick={handleOpenComputer}>
         Turn on the Computer
       </button>
       {
-        isOpen && <Computer closeComputer={closeComputer}/>
+        isOpen && <Computer handleCloseComputer={handleCloseComputer}/>
       }
     </div>
   )
