@@ -1,4 +1,5 @@
 import React, { useReducer } from 'react';
+import PropTypes from 'prop-types';
 
 import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUALITY } from './../constants/operators';
 import { initState, reducer } from './../reducers';
@@ -9,7 +10,7 @@ import Button from './button';
 const digitArr = ['0', '.', '1', '2', '3', '4' ,'5' ,'6' , '7', '8', '9'];
 const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUALITY];
 
-const Computer = () => {
+const Computer = ({ closeComputer }) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const { digits: { current, screen } } = state;
 
@@ -22,7 +23,7 @@ const Computer = () => {
 
   return (
     <div className='computer-wrapper'>
-      <div className='computer-background'></div>
+      <div className='computer-background' onClick={closeComputer}></div>
       <div className='computer-content'>
         <div className='computer-screen'>
           {screen}
@@ -74,6 +75,10 @@ const Computer = () => {
       </div>
     </div>
   )
+}
+
+Computer.propTypes = {
+  closeComputer: PropTypes.func.isRequired
 }
 
 export default Computer;

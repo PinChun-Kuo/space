@@ -4,6 +4,7 @@ import Computer from './computer';
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openComputer = () => setIsOpen(true);
+  const closeComputer = () => setIsOpen(false);
 
   return (
     <div>
@@ -14,7 +15,7 @@ const App = () => {
         Turn on the Computer
       </button>
       {
-        isOpen && <Computer />
+        isOpen && <Computer closeComputer={closeComputer}/>
       }
     </div>
   )
