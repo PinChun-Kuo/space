@@ -1,8 +1,18 @@
-import { GET_DIGIT, CLEAN_DIGIT, CLEAN_ALL, UPDATE_SIGN } from "./../constants";
+import { GET_DIGIT, GET_OPERATOR, CALCULATE_RESULT, CLEAN_DIGIT, CLEAN_ALL, UPDATE_SIGN } from "./../constants";
 
 export const getDigit = digit => ({
   type: GET_DIGIT,
   payload: { digit }
+})
+
+export const getOperator = operator => ({
+  type: GET_OPERATOR,
+  payload: { operator }
+})
+
+export const calculateResult = () => ({
+  type: CALCULATE_RESULT,
+  payload: {}
 })
 
 export const cleanDigit = () => ({

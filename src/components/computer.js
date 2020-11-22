@@ -1,19 +1,21 @@
 import React, { useReducer } from 'react';
 
-import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUAL } from './../constants/operators';
+import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUALITY } from './../constants/operators';
 import { initState, reducer } from './../reducers';
-import { getDigit, cleanDigit, cleanAll, updateSign } from './../actions';
+import { getDigit, getOperator, calculateResult, cleanDigit, cleanAll, updateSign } from './../actions';
 
 import Button from './button';
 
 const digitArr = ['0', '.', '1', '2', '3', '4' ,'5' ,'6' , '7', '8', '9'];
-const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUAL];
+const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUALITY];
 
 const Computer = () => {
   const [state, dispatch] = useReducer(reducer, initState);
   const { digits: { current, screen } } = state;
 
   const handleDigitClick = digit => () => dispatch(getDigit(digit));
+  const handleOperatorClick = operator => () => dispatch(getOperator(operator));
+  const handleCalculateResult = () => dispatch(calculateResult());
   const handleCleanDigit = () => dispatch(cleanDigit());
   const handleCleanAll = () => dispatch(cleanAll());
   const handleUpdateSign = () => dispatch(updateSign());
@@ -63,6 +65,7 @@ const Computer = () => {
                   key={`operator-button-${operator}`}
                   classes={'computer-button--circle operator-button'}
                   content = {operator}
+                  handleClick={(operator === OPERATOR_EQUALITY) ? handleCalculateResult : handleOperatorClick(operator)}
                 />
               ))
             }
