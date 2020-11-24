@@ -16,4 +16,4 @@ Button.propTypes = {
   handleClick: PropTypes.func
 }
 
-export default Button;
+export default React.memo(Button);

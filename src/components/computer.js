@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUALITY } from './../constants/operators';
@@ -14,12 +14,30 @@ const Computer = ({ handleCloseComputer }) => {
   const [state, dispatch] = useReducer(reducer, initState);
   const { digits: { current, screen } } = state;
 
-  const handleDigitClick = digit => () => dispatch(getDigit(digit));
-  const handleOperatorClick = operator => () => dispatch(getOperator(operator));
-  const handleCalculateResult = () => dispatch(calculateResult());
-  const handleCleanDigit = () => dispatch(cleanDigit());
-  const handleCleanAll = () => dispatch(cleanAll());
-  const handleUpdateSign = () => dispatch(updateSign());
+  const handleDigitClick = digit => useCallback(
+    () => dispatch(getDigit(digit)),
+    []
+  );
+  const handleOperatorClick = operator => useCallback(
+    () => dispatch(getOperator(operator)),
+    []
+  );
+  const handleCalculateResult = useCallback(
+    () => dispatch(calculateResult()),
+    []
+  );
+  const handleCleanDigit = useCallback(
+    () => dispatch(cleanDigit()),
+    []
+  );
+  const handleCleanAll = useCallback(
+    () => dispatch(cleanAll()),
+    []
+  );
+  const handleUpdateSign = useCallback(
+    () => dispatch(updateSign()),
+    []
+  );
 
   return (
     <div className='computer-wrapper'>
