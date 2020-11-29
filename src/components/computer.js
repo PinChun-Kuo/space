@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useState, useEffect, useReducer, useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { OPERATOR_CLEAN_DIGIT, OPERATOR_CLEAN_ALL, OPERATOR_UPDATE_SIGN, OPERATOR_PERCENTAGE, OPERATOR_ADDITION, OPERATOR_SUBTRACTION, OPERATOR_MULTIPLICATION, OPERATOR_DIVISION, OPERATOR_EQUALITY } from './../constants/operators';
@@ -10,10 +10,16 @@ import Button from './button';
 const digitArr = ['0', '.', '1', '2', '3', '4' ,'5' ,'6' , '7', '8', '9'];
 const operatorArr = [OPERATOR_DIVISION, OPERATOR_MULTIPLICATION, OPERATOR_SUBTRACTION, OPERATOR_ADDITION, OPERATOR_EQUALITY];
 
+const isPC = () => (window.screen.width > 575);
+
 const Computer = ({ handleCloseComputer }) => {
+  const isDragging = useRef(false);
+  const modalRef = useRef();
+  const [draggable, setDraggable] = useState(isPC());
+  const [positionX, setPositionX] = useState(0);
+  const [positionY, setPositionY] = useState(0);
   const [state, dispatch] = useReducer(reducer, initState);
   const { digits: { current, screen } } = state;
-
   const handleDigitClick = digit => useCallback(
     () => dispatch(getDigit(digit)),
     []
@@ -38,11 +44,51 @@ const Computer = ({ handleCloseComputer }) => {
     () => dispatch(updateSign()),
     []
   );
+  const onMouseDown = e => {
+    if (modalRef.current && modalRef.current.contains(e.target)) {
+      isDragging.current = true;
+    }
+  };
+  const onMouseUp = () => {
+    if (isDragging.current) {
+      isDragging.current = false;
+    }
+  };
+  const onMouseMove = e => {
+    if (isDragging.current) {
+      setPositionX(positionX => positionX + e.movementX);
+      setPositionY(positionY => positionY + e.movementY);
+    }
+  };
+  const onResize = () => {
+    setDraggable(isPC());
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", onResize);
+    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("mousemove", onMouseMove);
+    };
+  }, []);
 
   return (
     <div className='computer-wrapper'>
       <div className='computer-background' onClick={handleCloseComputer}></div>
-      <div className='computer-content'>
+      <div
+        className='computer-content'
+        ref={modalRef}
+        style={draggable ? {
+          left: `${positionX}px`,
+          top: `${positionY}px`,
+        } : {}}
+      >
         <div className='computer-screen'>
           {screen}
         </div>
