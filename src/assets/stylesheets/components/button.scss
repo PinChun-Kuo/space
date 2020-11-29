@@ -4,20 +4,25 @@
   font-size: 32px;
   font-weight: bold;
   cursor: pointer;
-}
 
-.computer-button--circle {
-  width: calc((480px - 100px) / 4);
-  height: calc((480px - 100px) / 4);
-  line-height: calc((480px - 100px) / 4);
-  border-radius: calc((480px - 100px) / 4);
-}
+  &--disable {
+    opacity: 0.5;
+    cursor: unset;
+  }
 
-.computer-button--oval {
-  width: calc((480px - 60px) / 2);
-  height: calc((480px - 100px) / 4);
-  line-height: calc((480px - 100px) / 4);
-  border-radius: calc((480px - 100px) / 4);
+  &--circle {
+    width: calc((480px - 100px) / 4);
+    height: calc((480px - 100px) / 4);
+    line-height: calc((480px - 100px) / 4);
+    border-radius: calc((480px - 100px) / 4);
+  }
+
+  &--oval {
+    width: calc((480px - 60px) / 2);
+    height: calc((480px - 100px) / 4);
+    line-height: calc((480px - 100px) / 4);
+    border-radius: calc((480px - 100px) / 4);
+  }
 }
 
 .function-button {
@@ -38,39 +43,39 @@
 @media only screen and (max-width: 575px) {
   .computer-button {
     font-size: calc((100vw - 100px) / 4 / 3);
-  }
 
-  .computer-button--circle {
-    width: calc((100vw - 100px) / 4);
-    height: calc((100vw - 100px) / 4);
-    line-height: calc((100vw - 100px) / 4);
-    border-radius: calc((100vw - 100px) / 4);
-  }
+    &--circle {
+      width: calc((100vw - 100px) / 4);
+      height: calc((100vw - 100px) / 4);
+      line-height: calc((100vw - 100px) / 4);
+      border-radius: calc((100vw - 100px) / 4);
+    }
 
-  .computer-button--oval {
-    width: calc((100vw - 60px) / 2);
-    height: calc((100vw - 100px) / 4);
-    line-height: calc((100vw - 100px) / 4);
-    border-radius: calc((100vw - 100px) / 4);
+    &--oval {
+      width: calc((100vw - 60px) / 2);
+      height: calc((100vw - 100px) / 4);
+      line-height: calc((100vw - 100px) / 4);
+      border-radius: calc((100vw - 100px) / 4);
+    }
   }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .computer-button {
     font-size: 24px;
-  }
 
-  .computer-button--circle {
-    width: calc((360px - 100px) / 4);
-    height: calc((360px - 100px) / 4);
-    line-height: calc((360px - 100px) / 4);
-    border-radius: calc((360px - 100px) / 4);
-  }
+    &--circle {
+      width: calc((360px - 100px) / 4);
+      height: calc((360px - 100px) / 4);
+      line-height: calc((360px - 100px) / 4);
+      border-radius: calc((360px - 100px) / 4);
+    }
 
-  .computer-button--oval {
-    width: calc((360px - 60px) / 2);
-    height: calc((360px - 100px) / 4);
-    line-height: calc((360px - 100px) / 4);
-    border-radius: calc((360px - 100px) / 4);
+    &--oval {
+      width: calc((360px - 60px) / 2);
+      height: calc((360px - 100px) / 4);
+      line-height: calc((360px - 100px) / 4);
+      border-radius: calc((360px - 100px) / 4);
+    }
   }
 }

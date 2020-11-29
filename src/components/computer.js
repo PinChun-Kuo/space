@@ -97,17 +97,18 @@ const Computer = ({ handleCloseComputer }) => {
             <div className='computer-buttons__left-side__function-menu'>
               <Button
                 classes={'computer-button--circle function-button'}
-                content = {(current === '0') ? OPERATOR_CLEAN_ALL : OPERATOR_CLEAN_DIGIT}
-                handleClick = {(current === '0') ? handleCleanAll : handleCleanDigit}
+                content={(current === '0') ? OPERATOR_CLEAN_ALL : OPERATOR_CLEAN_DIGIT}
+                handleClick={(current === '0') ? handleCleanAll : handleCleanDigit}
               />
               <Button
                 classes={'computer-button--circle function-button'}
-                content = {OPERATOR_UPDATE_SIGN}
-                handleClick = {handleUpdateSign}
+                content={OPERATOR_UPDATE_SIGN}
+                handleClick={handleUpdateSign}
               />
               <Button
                 classes={'computer-button--circle function-button'}
-                content = {OPERATOR_PERCENTAGE}
+                content={OPERATOR_PERCENTAGE}
+                disable={true}
               />
             </div>
             <div className='computer-buttons__left-side__digits'>
@@ -116,7 +117,7 @@ const Computer = ({ handleCloseComputer }) => {
                 <Button
                   key={`digit-button-${digit}`}
                   classes={`digit-button ${(digit === '0') ? 'computer-button--oval' : 'computer-button--circle'}`}
-                  content = {digit}
+                  content={digit}
                   handleClick={handleDigitClick(digit)}
                 />
               ))
@@ -129,7 +130,8 @@ const Computer = ({ handleCloseComputer }) => {
                 <Button
                   key={`operator-button-${operator}`}
                   classes={'computer-button--circle operator-button'}
-                  content = {operator}
+                  content={operator}
+                  disable={((operator === OPERATOR_DIVISION) || (operator === OPERATOR_MULTIPLICATION)) ? true : false}
                   handleClick={(operator === OPERATOR_EQUALITY) ? handleCalculateResult : handleOperatorClick(operator)}
                 />
               ))
